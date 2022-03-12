@@ -1,0 +1,16 @@
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/strscan-3.0.1/ext/strscan
+/usr/share/rvm/rubies/ruby-3.0.0/bin/ruby -I /usr/share/rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20220312-17762-8f0jem.rb extconf.rb
+checking for onig_region_memsize() in ruby.h... yes
+creating Makefile
+
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/strscan-3.0.1/ext/strscan
+make "DESTDIR=" clean
+
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/strscan-3.0.1/ext/strscan
+make "DESTDIR="
+compiling strscan.c
+linking shared-object strscan.so
+
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/strscan-3.0.1/ext/strscan
+make "DESTDIR=" install
+/usr/bin/install -m 0755 strscan.so ./.gem.20220312-17762-c37d23
