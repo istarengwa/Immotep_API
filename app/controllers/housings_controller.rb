@@ -1,7 +1,7 @@
 class HousingsController < ApplicationController
   before_action :set_housing, only: %i[ show update destroy ]
   before_action :authenticate_user!
-  # before_action :owner_user
+  before_action :owner_user, only: %i[ show update destroy ]
 
   # GET /housings
   def index
@@ -51,10 +51,10 @@ class HousingsController < ApplicationController
       params.require(:housing).permit(:ad_price, :property_category, :localization, :area, :ad_url, :comment, :offer_price, :repairs_price, :annual_rent, :notary_fees, :agency_fees, :pno_insurance, :property_tax, :rental_management, :rental_unpayment_insurance, :building_co_tax, :maintenance_percentage, :ad_profitability, :offer_profitability, :new_property, :rental_vacancy, :project)
     end
 
-    # Vérifie que l'user qui consulte est celui qui a créé le projet
-    # def owner_user
-    #   if @housing.project.user == current_user
-    #     return true
-    #   end
-    # end
+    #Vérifie que l'user qui consulte est celui qui a créé le projet
+    def owner_user
+      if @housing.project.user == current_user
+        return true
+      end
+    end
 end
