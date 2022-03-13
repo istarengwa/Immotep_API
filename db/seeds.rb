@@ -30,7 +30,7 @@ end
 Project.all.each do |project|
   project_id = project.id
   2.times do
-  Housing.create(ad_price: Faker::Number.number(digits: 6), property_category: Faker::Movies::StarWars.droid, project_id: project_id)   
+    Housing.create(ad_price: Faker::Number.number(digits: 6), property_category: Faker::Movies::StarWars.droid, project_id: project_id)   
   puts("Housing is created")
 
   end

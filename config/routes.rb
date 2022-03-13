@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  resources :projects do 
+    resources :housings 
+  end
   resources :housings
-  resources :projects
   devise_for :users,
             controllers: {
                 sessions: 'users/sessions',
                 registrations: 'users/registrations'
-            }
+            },
+            defaults: { format: :json }
   get '/member-data', to: 'members#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
