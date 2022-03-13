@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show update destroy ]
   before_action :authenticate_user!
-  before_action :owner_user, only: %i[ show update destroy ]
+  before_action :owner_user, only: %i[ index show update destroy ]
 
   # GET /projects
   def index
@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:title, :localization, :comment, :user)
+      params.require(:project).permit(:title, :localization, :comment)
     end
 
     # Vérifie que l'user qui consulte est celui qui a créé le projet

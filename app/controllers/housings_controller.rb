@@ -17,7 +17,9 @@ class HousingsController < ApplicationController
 
   # POST /housings
   def create
-    @housing = Housing.new(housing_params)
+    @housing = Housing.new(
+      project_id: params[:project_id]
+    )
 
     if @housing.save
       render json: @housing, status: :created, location: @housing

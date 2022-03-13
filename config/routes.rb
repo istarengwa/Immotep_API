@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :projects do 
+    resources :housings 
+  end
   resources :housings
-  resources :projects
   devise_for :users,
             controllers: {
                 sessions: 'users/sessions',
