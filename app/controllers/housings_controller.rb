@@ -17,17 +17,14 @@ class HousingsController < ApplicationController
 
   # POST /housings
   def create
-    @housing = Housing.new(
-      ad_price: housing_params[:ad_price],
-      property_category: housing_params[:property_category],
-      localization: housing_params[:localization],
+    all_params_housing = housing_params.merge(
       offer_price: housing_params[:ad_price],
       notary_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
       agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
       maintenance_percentage: 2,
       rental_vacancy: 6,
-      project_id: params[:project_id]
-    )
+      project_id: params[:project_id])
+    @housing = Housing.new(all_params_housing)
 
     if @housing.save
       render json: @housing, status: :created, location: @housing
