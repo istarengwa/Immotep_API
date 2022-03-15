@@ -11,7 +11,6 @@ Rails.application.routes.draw do
             },
             defaults: { format: :json }
   get '/member-data', to: 'members#show'
-  resource :passwords, only: [:create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

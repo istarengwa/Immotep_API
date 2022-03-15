@@ -1,5 +1,4 @@
-class PasswordsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:create]
+class Users::PasswordsController < ApplicationController
 
   def create
     user = User.find_by(email: create_params[:email])
