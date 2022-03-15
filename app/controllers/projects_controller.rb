@@ -17,7 +17,8 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = Project.new(title: project_params[:title], localization: project_params[:localization], comment: project_params[:comment], user: current_user )
+    all_params_project = project_params.merge(user: current_user)
+    @project = Project.new(all_params_project)
 
     if @project.save
       render json: @project, status: :created, location: @project
