@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = Project.all
+    @projects = Project.where(user_id: current_user.id) 
 
     render json: @projects
   end
@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     all_params_project = project_params.merge(user: current_user)
+
     @project = Project.new(all_params_project)
 
     if @project.save
