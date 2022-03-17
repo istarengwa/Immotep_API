@@ -1,8 +1,16 @@
 module HousingsHelper
+  def unauthorized_create
+    render json: {
+      error: {
+        title: "Vous n'êtes pas authorisé à créer un housings sur un projet qui n'est pas à vous"
+      }
+    }
+  end
+
   def unauthorized_update
     render json: {
       error: {
-        title: "Vous n'êtes pas authorisé à modifier un projet qui n'est pas à vous"
+        title: "Vous n'êtes pas authorisé à modifier un housings qui n'est pas à vous"
       }
     }
   end
@@ -10,7 +18,7 @@ module HousingsHelper
   def unauthorized_destroy
     render json: {
       error: {
-        title: "Vous n'êtes pas authorisé à supprimer un projet qui n'est pas à vous"
+        title: "Vous n'êtes pas authorisé à supprimer un housings qui n'est pas à vous"
       }
     }
   end
@@ -18,7 +26,7 @@ module HousingsHelper
   def unauthorized_show
     render json: {
       error: {
-        title: "Vous n'êtes pas authorisé à voir un projet qui n'est pas à vous"
+        title: "Vous n'êtes pas authorisé à voir un housings qui n'est pas à vous"
       }
     }
   end

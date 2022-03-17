@@ -20,6 +20,8 @@ class HousingsController < ApplicationController
 
   # POST /housings
   def create
+    unauthorized_create && return if no_owner_user
+    
     all_params_housing = housing_params.merge(
       offer_price: housing_params[:ad_price],
       notary_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
@@ -38,6 +40,8 @@ class HousingsController < ApplicationController
 
   # PATCH/PUT /housings/1
   def update
+    unauthorized_udpate && return if no_owner_user
+
     if @housing.update(housing_params)
       render json: @housing
     else
@@ -47,6 +51,8 @@ class HousingsController < ApplicationController
 
   # DELETE /housings/1
   def destroy
+    unauthorized_destroy && return if no_owner_user
+
     @housing.destroy
   end
 
