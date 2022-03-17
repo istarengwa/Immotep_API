@@ -38,4 +38,15 @@ module HousingsHelper
       return true
     end
   end
+
+  def all_params 
+    housing_params.merge(
+      offer_price: housing_params[:ad_price],
+      notary_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
+      agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
+      maintenance_percentage: 2,
+      rental_vacancy: 6,
+      project_id: params[:project_id]
+    )
+  end
 end
