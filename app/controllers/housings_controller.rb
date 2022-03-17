@@ -1,5 +1,5 @@
 class HousingsController < ApplicationController
-  # include HousingsHelper
+  include HousingsHelper
 
   before_action :set_housing, only: %i[ show update destroy ]
   before_action :authenticate_user!
@@ -13,7 +13,7 @@ class HousingsController < ApplicationController
 
   # GET /housings/1
   def show
-    # unauthorized_show && return if no_owner_user
+    unauthorized_show && return if no_owner_user
 
     render json: @housing
   end

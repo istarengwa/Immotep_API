@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       user: current_user
     }, status: :ok
 
-    UserMailer.welcome_email(current_user).deliver_now
+    # UserMailer.welcome_email(current_user).deliver_now
   end
 
   def register_failed
