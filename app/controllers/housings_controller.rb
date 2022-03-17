@@ -6,6 +6,8 @@ class HousingsController < ApplicationController
 
   # GET /housings
   def index
+    unauthorized_show_all && return if no_owner_user
+
     @housings = Housing.all
 
     render json: @housings
