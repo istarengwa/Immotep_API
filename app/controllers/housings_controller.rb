@@ -1,7 +1,8 @@
 class HousingsController < ApplicationController
+  # include HousingsHelper
+
   before_action :set_housing, only: %i[ show update destroy ]
   before_action :authenticate_user!
-  before_action :owner_user, only: %i[ show update destroy ]
 
   # GET /housings
   def index
@@ -12,6 +13,8 @@ class HousingsController < ApplicationController
 
   # GET /housings/1
   def show
+    # unauthorized_show && return if no_owner_user
+
     render json: @housing
   end
 
@@ -56,12 +59,5 @@ class HousingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def housing_params
       params.require(:housing).permit(:ad_price, :property_category, :localization, :area, :ad_url, :comment, :offer_price, :repairs_price, :annual_rent, :notary_fees, :agency_fees, :pno_insurance, :property_tax, :rental_management, :rental_unpayment_insurance, :building_co_tax, :maintenance_percentage, :ad_profitability, :offer_profitability, :new_property, :rental_vacancy, :project)
-    end
-
-    #Vérifie que l'user qui consulte est celui qui a créé le projet
-    def owner_user
-      if @housing.project.user_id == current_user.id
-        return true
-      end
     end
 end
