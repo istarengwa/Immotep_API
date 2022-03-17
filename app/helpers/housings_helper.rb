@@ -39,10 +39,12 @@ module HousingsHelper
     }
   end
 
-  def no_owner_user
-    @project_user = Project.find(params[:project_id].to_i).user_id
+  def project_find
+    Project.find(params[:project_id])
+  end
 
-    if current_user.id != @project_user.to_i
+  def no_owner_user
+    if current_user.id != project_find.user_id
       return true
     end
   end

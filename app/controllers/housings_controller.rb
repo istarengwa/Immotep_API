@@ -8,7 +8,7 @@ class HousingsController < ApplicationController
   def index
     unauthorized_show_all && return if no_owner_user
 
-    @housings = Housing.all
+    @housings = Housing.where(project_id: project_find)
 
     render json: @housings
   end
