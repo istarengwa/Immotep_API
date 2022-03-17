@@ -1,11 +1,13 @@
 class HousingsController < ApplicationController
-  # include HousingsHelper
+  include HousingsHelper
 
   before_action :set_housing, only: %i[ show update destroy ]
   before_action :authenticate_user!
 
   # GET /housings
   def index
+    unauthorized_show_all && return if no_owner_user
+
     @housings = Housing.all
 
     render json: @housings
@@ -13,21 +15,16 @@ class HousingsController < ApplicationController
 
   # GET /housings/1
   def show
-    # unauthorized_show && return if no_owner_user
+    unauthorized_show && return if no_owner_user
 
     render json: @housing
   end
 
   # POST /housings
   def create
-    all_params_housing = housing_params.merge(
-      offer_price: housing_params[:ad_price],
-      notary_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
-      agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
-      maintenance_percentage: 2,
-      rental_vacancy: 6,
-      project_id: params[:project_id])
-    @housing = Housing.new(all_params_housing)
+    unauthorized_create && return if no_owner_user
+    
+    @housing = Housing.new(all_params)
 
     if @housing.save
       render json: @housing, status: :created, location: @housing
@@ -38,6 +35,8 @@ class HousingsController < ApplicationController
 
   # PATCH/PUT /housings/1
   def update
+    unauthorized_udpate && return if no_owner_user
+
     if @housing.update(housing_params)
       render json: @housing
     else
@@ -47,6 +46,8 @@ class HousingsController < ApplicationController
 
   # DELETE /housings/1
   def destroy
+    unauthorized_destroy && return if no_owner_user
+
     @housing.destroy
   end
 

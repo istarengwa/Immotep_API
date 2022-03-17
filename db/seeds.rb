@@ -21,7 +21,12 @@ end
 User.all.each do |user|
   user_id = user.id
   2.times do
-    Project.create(title: Faker::Movies::StarWars.specie, comment: Faker::Movies::StarWars.wookiee_sentence, localization: Faker::Movies::StarWars.planet, user_id: user_id)
+    Project.create(
+      title: Faker::Movies::StarWars.specie, 
+      comment: Faker::Movies::StarWars.wookiee_sentence, 
+      localization: Faker::Movies::StarWars.planet, 
+      user_id: user_id
+    )
   puts("Project is created")
 
   end
@@ -30,7 +35,11 @@ end
 Project.all.each do |project|
   project_id = project.id
   2.times do
-    Housing.create(ad_price: Faker::Number.number(digits: 6), property_category: Faker::Movies::StarWars.droid, project_id: project_id)   
+    Housing.create(
+      ad_price: Faker::Number.number(digits: 6), 
+      property_category: Faker::Movies::StarWars.droid, 
+      project_id: project_id
+    )   
   puts("Housing is created")
 
   end
