@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
+  include ProjectsHelper
+
   before_action :set_project, only: %i[ show update destroy ]
   before_action :authenticate_user!
-  before_action :owner_user, only: %i[ index show update destroy ]
 
   # GET /projects
   def index
@@ -12,6 +13,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
+    unauthorized_show && return if no_owner_user
+
     render json: @project
   end
 
@@ -29,6 +32,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   def update
+    unauthorized_update && return if no_owner_user
+
     if @project.update(project_params)
       render json: @project
     else
@@ -38,6 +43,8 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy
+    unauthorized_destroy && return if no_owner_user
+
     @project.destroy
   end
 
@@ -50,12 +57,5 @@ class ProjectsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def project_params
       params.require(:project).permit(:title, :localization, :comment)
-    end
-
-    # Vérifie que l'user qui consulte est celui qui a créé le projet
-    def owner_user
-      if @project.user == current_user
-        return true
-      end
     end
 end
