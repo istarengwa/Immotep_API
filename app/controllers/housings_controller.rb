@@ -60,7 +60,7 @@ class HousingsController < ApplicationController
 
     #Vérifie que l'user qui consulte est celui qui a créé le projet
     def owner_user
-      if @housing.project.user == current_user
+      if @housing.project.user_id == current_user.id
         return true
       end
     end
