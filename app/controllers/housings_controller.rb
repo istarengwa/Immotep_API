@@ -1,4 +1,5 @@
 class HousingsController < ApplicationController
+  include ActionController::Helpers
   include HousingsHelper
 
   before_action :set_housing, only: %i[ show update destroy ]

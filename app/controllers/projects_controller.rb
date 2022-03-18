@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  include ActionController::Helpers
   include ProjectsHelper
 
   before_action :set_project, only: %i[ show update destroy ]
