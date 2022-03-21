@@ -51,9 +51,17 @@ module HousingsHelper
 
   def all_params 
     housing_params.merge(
+      area: 0,
       offer_price: housing_params[:ad_price],
+      repairs_price: 0,
+      annual_rent: 0,
       notary_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
       agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
+      pno_insurance: 0,
+      property_tax: 0,
+      rental_management: 0,
+      rental_unpayment_insurance: 0,
+      building_co_tax: 0,
       maintenance_percentage: 2,
       rental_vacancy: 6,
       project_id: params[:project_id]
