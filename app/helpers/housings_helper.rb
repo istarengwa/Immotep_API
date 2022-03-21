@@ -67,4 +67,57 @@ module HousingsHelper
       project_id: params[:project_id]
     )
   end
+
+  def all_params_update
+    housing_params.merge(    
+      ad_profitability: calculate_profitability(housing_params[:ad_price]),
+      offer_profitability: calculate_profitability(housing_params[:offer_price])
+    )
+  end
+        
+  def calculate_profitability(price)
+
+    price = price || 0
+    property_tax = housing_params[:property_tax] || 0
+    ad_price = housing_params[:ad_price] || 0
+    maintenance_percentage = housing_params[:maintenance_percentage] || 0
+    building_co_tax = housing_params[:building_co_tax] || 0
+    annual_rent = housing_params[:annual_rent] || 0
+    ad_profitability = housing_params[:ad_profitability] || 0
+    annual_rent = housing_params[:annual_rent] || 0
+    rental_vacancy = housing_params[:rental_vacancy] || 0
+    notary_fees = housing_params[:notary_fees] || 0
+    repairs_price = housing_params[:repairs_price] || 0
+    agency_fees = housing_params[:agency_fees] || 0
+    offer_price = housing_params[:offer_price] || 0
+
+    if(housing_params[:pno_insurance] == true)
+      pno = 0.03
+    else
+      pno = 0
+    end
+
+    if(housing_params[:rental_management] == true)
+      management = 0.07
+    else
+      management = 0
+    end
+
+    if(housing_params[:rental_unpayment_insurance] == true)
+      unpayment = 0.04
+    else
+      unpayment = 0
+    end
+
+    if(housing_params[:new_property] == true)
+      notary_fees = offer_price * 0.03
+    end
+
+    calculated_percentage = price * (maintenance_percentage / 100)
+    fees = property_tax + calculated_percentage + building_co_tax + (annual_rent * management) + (annual_rent * pno) + (annual_rent * unpayment)
+    profitability = (annual_rent * ( 1- (rental_vacancy / 100) ) - fees) * 100 / (price  + repairs_price + notary_fees + agency_fees)
+    profitability = 0 if profitability.nan?
+  end
+
+
 end
