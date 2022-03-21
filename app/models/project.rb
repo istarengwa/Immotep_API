@@ -1,4 +1,4 @@
 class Project < ApplicationRecord
   belongs_to :user
-  has_many :housings, dependent: :delete_all
+  has_many :housings, -> { order(ad_price: :desc) }, dependent: :delete_all 
 end
