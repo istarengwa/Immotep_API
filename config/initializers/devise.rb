@@ -17,6 +17,7 @@ Devise.setup do |config|
   # config.secret_key = 'c70698b8fc493ab417a10fd2f293b1cb2c59cb896ece289ed756ba3db6d340332fa72f5eab77d035b6750511d92f90b941e7ec36e3dd0beaf615e267f9635682'
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+    jwt.expiration_time = 24 * 3600 # 24 hours
   end
 
   config.navigational_formats = [:json]

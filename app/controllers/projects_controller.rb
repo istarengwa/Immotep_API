@@ -15,7 +15,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   def show
     unauthorized_show && return if no_owner_user
-    housings = @project.housings&.order("offer_profitability ASC").to_json
 
     render json: @project.to_json(include: :housings)
   end
