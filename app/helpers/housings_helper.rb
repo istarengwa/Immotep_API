@@ -59,7 +59,7 @@ module HousingsHelper
       agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
       pno_insurance: 0,
       property_tax: 0,
-      rental_management: 0,
+      #rental_management: false,
       rental_unpayment_insurance: 0,
       building_co_tax: 0,
       maintenance_percentage: 2,
@@ -82,8 +82,6 @@ module HousingsHelper
     ad_price = housing_params[:ad_price] || 0
     maintenance_percentage = housing_params[:maintenance_percentage] || 0
     building_co_tax = housing_params[:building_co_tax] || 0
-    annual_rent = housing_params[:annual_rent] || 0
-    ad_profitability = housing_params[:ad_profitability] || 0
     annual_rent = housing_params[:annual_rent] || 0
     rental_vacancy = housing_params[:rental_vacancy] || 0
     notary_fees = housing_params[:notary_fees] || 0
@@ -113,10 +111,19 @@ module HousingsHelper
       notary_fees = offer_price * 0.03
     end
 
+    #Part fees
     calculated_percentage = price * (maintenance_percentage / 100)
-    fees = property_tax + calculated_percentage + building_co_tax + (annual_rent * management) + (annual_rent * pno) + (annual_rent * unpayment)
-    profitability = (annual_rent * ( 1- (rental_vacancy / 100) ) - fees) * 100 / (price  + repairs_price + notary_fees + agency_fees)
-    profitability = 0 if profitability.nan?
+    annual_rent_management = annual_rent * management
+    annual_rent_pno = annual_rent * pno
+    annual_rent_unpayment = annual_rent * unpayment
+
+    fees = property_tax + calculated_percentage + building_co_tax + annual_rent_management + annual_rent_pno + annual_rent_unpayment
+
+    #Part profitability
+    rental_vacancy_fees = (annual_rent * ( 1 - (rental_vacancy / 100) ) - fees)
+    price_fees = (price  + repairs_price + notary_fees + agency_fees)
+    price_fees = 1 if price_fees = 0
+    profitability = rental_vacancy_fees * 100 / price_fees
   end
 
 
