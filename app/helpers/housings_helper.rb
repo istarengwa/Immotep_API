@@ -59,6 +59,7 @@ module HousingsHelper
       agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
       pno_insurance: 0,
       property_tax: 0,
+      #rental_management: false,
       rental_unpayment_insurance: 0,
       building_co_tax: 0,
       maintenance_percentage: 2,
@@ -81,7 +82,6 @@ module HousingsHelper
     ad_price = housing_params[:ad_price] || 0
     maintenance_percentage = housing_params[:maintenance_percentage] || 0
     building_co_tax = housing_params[:building_co_tax] || 0
-    annual_rent = housing_params[:annual_rent] || 0
     annual_rent = housing_params[:annual_rent] || 0
     rental_vacancy = housing_params[:rental_vacancy] || 0
     notary_fees = housing_params[:notary_fees] || 0
