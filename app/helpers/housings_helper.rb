@@ -133,7 +133,7 @@ module HousingsHelper
 
 
     fees = property_tax + maintenance_costs + building_co_tax + management_costs + pno_cost + unpayment_cost
-      profitability = real_annual_rent - fees * 100 / (price  + repairs_price + notary_fees + agency_fees)
+      profitability = (real_annual_rent - fees) * 100 / (price  + repairs_price + notary_fees + agency_fees)
     end
   end
 
