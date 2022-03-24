@@ -36,7 +36,7 @@ class HousingsController < ApplicationController
 
   # PATCH/PUT /housings/1
   def update
-    unauthorized_udpate && return if no_owner_user
+    unauthorized_update && return if no_owner_user
 
     if @housing.update(all_params_update)
       render json: @housing

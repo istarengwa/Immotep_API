@@ -59,7 +59,6 @@ module HousingsHelper
       agency_fees: ((housing_params[:ad_price]).to_i * 0.08).to_i,
       pno_insurance: 0,
       property_tax: 0,
-      #rental_management: false,
       rental_unpayment_insurance: 0,
       building_co_tax: 0,
       maintenance_percentage: 2,
