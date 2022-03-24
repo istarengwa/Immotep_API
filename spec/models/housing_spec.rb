@@ -4,33 +4,26 @@ require 'faker'
 RSpec.describe Housing, type: :model do
   
   it 'no create for no user' do
-    Housing.create(ad_price: Faker::Number.number(digits: 2))
+    Housing.create(ad_price: 25)
     expect(Project.count).to eq(0)
   end
 
   it 'create two housing for one project' do
-    User.create(email: Faker::Internet.email, password: "password")
+    user = User.create(email: "rspec@rspec.test", password: "password")
     
-    User.all.each do |user|
-      user_id = user.id
-      1.times do
-        Project.create(
-          title: Faker::Movies::StarWars.specie,
-          user_id: user_id
-        )
-      end
-    end
+    project = Project.create(title: "Test rspec", user_id: user.id)
 
-    Project.all.each do |project|
-      project_id = project.id
-      2.times do
-        Housing.create(
-          ad_price: Faker::Number.number(digits: 2),
-          project_id: project_id
-        )
-      end
+    2.times do
+      Housing.create(ad_price: 254512, project_id: project.id)
     end
 
     expect(Housing.count).to eq(2)
   end 
+
+  context 'validation' do
+    it 'should validate content length' do
+      housing = Housing.new(comment: "!blabla@")
+      expect(housing.valid?).to be false
+    end
+  end
 end

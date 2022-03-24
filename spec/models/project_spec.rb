@@ -8,18 +8,10 @@ RSpec.describe Project, type: :model do
   end
 
   it 'create and persist two projects for one user' do
-    User.create(email: Faker::Internet.email, password: "password")
+    user = User.create(email: "rspec@rspec.test", password: "password")
     
-    User.all.each do |user|
-      user_id = user.id
-      2.times do
-        Project.create(
-          title: Faker::Movies::StarWars.specie, 
-          comment: Faker::Movies::StarWars.wookiee_sentence, 
-          localization: Faker::Movies::StarWars.planet, 
-          user_id: user_id
-        )
-      end
+    2.times do
+      Project.create(title: "Test rspec", user_id: user.id)
     end
 
     expect(Project.count).to eq(2)
