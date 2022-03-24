@@ -111,18 +111,30 @@ module HousingsHelper
     end
 
     #Part fees
-    calculated_percentage = price * (maintenance_percentage / 100)
-    annual_rent_management = annual_rent * management
-    annual_rent_pno = annual_rent * pno
-    annual_rent_unpayment = annual_rent * unpayment
+    # calculated_percentage = price * (maintenance_percentage / 100)
+    # annual_rent_management = annual_rent * management
+    # annual_rent_pno = annual_rent * pno
+    # annual_rent_unpayment = annual_rent * unpayment
 
-    fees = property_tax + calculated_percentage + building_co_tax + annual_rent_management + annual_rent_pno + annual_rent_unpayment
+    # fees = property_tax + calculated_percentage + building_co_tax + annual_rent_management + annual_rent_pno + annual_rent_unpayment
 
     #Part profitability
-    rental_vacancy_fees = (annual_rent * ( 1 - (rental_vacancy / 100) ) - fees)
-    price_fees = (price  + repairs_price + notary_fees + agency_fees)
-    price_fees = 1 if price_fees = 0
-    profitability = rental_vacancy_fees * 100 / price_fees
+    # rental_vacancy_fees = (annual_rent * ( 1 - (rental_vacancy / 100) ) - fees)
+    # price_fees = (price  + repairs_price + notary_fees + agency_fees)
+    # price_fees = 1 if price_fees = 0
+    # profitability = rental_vacancy_fees * 100 / price_fees
+
+    # Fees
+    maintenance_costs= annual_rent * (maintenance_percentage/100)
+    management_costs =annual_rent * management
+    pno_cost = annual_rent * pno
+    unpayment_cost = annual_rent * unpayment
+    real_annual_rent = annual_rent*(1-(housing.rental_vacancy/100))
+
+
+    fees = property_tax + maintenance_costs + building_co_tax + management_costs + pno_cost + unpayment_cost
+      profitability = real_annual_rent - fees * 100 / (price  + repairs_price + notary_fees + agency_fees)
+    end
   end
 
 
