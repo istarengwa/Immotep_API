@@ -68,7 +68,7 @@ module HousingsHelper
   end
 
   def all_params_update
-    housing_params.merge(    
+    housing_params.merge(
       ad_profitability: calculate_profitability(Housing.find(params[:id]).ad_price),
       offer_profitability: calculate_profitability(Housing.find(params[:id]).offer_price),  
       notary_fees: ((Housing.find(params[:id]).offer_price).to_i * 0.08).to_i,

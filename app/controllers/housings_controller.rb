@@ -38,7 +38,8 @@ class HousingsController < ApplicationController
   def update
     unauthorized_update && return if no_owner_user
 
-    if @housing.update(all_params_update)
+    if @housing.update(housing_params)
+      @housing.update(all_params_update)
       render json: @housing
     else
       render json: @housing.errors, status: :unprocessable_entity
