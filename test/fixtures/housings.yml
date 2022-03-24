@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ad_price: 1
+  property_category: MyString
+  localization: MyString
+  area: 1
+  ad_url: MyString
+  comment: MyText
+  offer_price: 1
+  repairs_price: 1
+  annual_rent: 1
+  notary_fees: 1.5
+  agency_fees: 1
+  pno_insurance: false
+  property_tax: 1
+  rental_management: 1.5
+  rental_unpayment_insurance: false
+  building_co_tax: 1
+  maintenance_percentage: 1.5
+  ad_profitability: 1.5
+  offer_profitability: 1.5
+  new_property: false
+  rental_vacancy: 1.5
+
+two:
+  ad_price: 1
+  property_category: MyString
+  localization: MyString
+  area: 1
+  ad_url: MyString
+  comment: MyText
+  offer_price: 1
+  repairs_price: 1
+  annual_rent: 1
+  notary_fees: 1.5
+  agency_fees: 1
+  pno_insurance: false
+  property_tax: 1
+  rental_management: 1.5
+  rental_unpayment_insurance: false
+  building_co_tax: 1
+  maintenance_percentage: 1.5
+  ad_profitability: 1.5
+  offer_profitability: 1.5
+  new_property: false
+  rental_vacancy: 1.5

@@ -1,0 +1,18 @@
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/io-wait-0.2.1/ext/io/wait
+/usr/share/rvm/rubies/ruby-3.0.0/bin/ruby -I /usr/share/rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20220312-17762-o2kyyz.rb extconf.rb
+checking for rb_io_wait()... yes
+checking for sys/ioctl.h... yes
+checking for FIONREAD in sys/ioctl.h,sys/ioctl.h... yes
+creating Makefile
+
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/io-wait-0.2.1/ext/io/wait
+make "DESTDIR=" clean
+
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/io-wait-0.2.1/ext/io/wait
+make "DESTDIR="
+compiling wait.c
+linking shared-object io/wait.so
+
+current directory: /home/ophelie-gaudin/dossierlinux/THP/immotep-app/API/vendor/bundle/ruby/3.0.0/gems/io-wait-0.2.1/ext/io/wait
+make "DESTDIR=" install
+/usr/bin/install -m 0755 wait.so ./.gem.20220312-17762-2brdws/io
