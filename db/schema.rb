@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_121159) do
     t.integer "agency_fees"
     t.boolean "pno_insurance"
     t.integer "property_tax"
-    t.boolean "rental_management"
+    t.float "rental_management"
     t.boolean "rental_unpayment_insurance"
     t.integer "building_co_tax"
     t.float "maintenance_percentage"

@@ -21,7 +21,7 @@ RSpec.describe Project, type: :model do
     it 'add one hounsing in one project' do
       user = User.create(email: "rspec@rspec.test", password: "password")
       project = Project.create(title: "Test rspec", user_id: user.id)
-      project.housings << Housing.new(ad_price: 5, project_id: project.id)
+      project.housings << Housing.new(ad_price: 5, localization: "test", property_category: "Studio", project_id: project.id)
       project.save
       expect(Housing.count).to eq(1)
       expect(project.housings.count).to eq(1)
