@@ -1,29 +1,46 @@
 require 'rails_helper'
-require 'faker'
 
 RSpec.describe Housing, type: :model do
-  
-  it 'no create for no user' do
-    Housing.create(ad_price: 25, property_category: "Studio", localization: "test")
-    expect(Project.count).to eq(0)
-  end
 
-  it 'create two housing for one project' do
-    
-    user = User.create(email: "rspec@rspec.test", password: "password")    
-    project = Project.create(title: "Test rspec", user_id: user.id)
+  describe 'Model Housing' do
+    let!(:user) { create(:user) }
+    let!(:project) { create(:project) }
+    let!(:housing) { build(:housing) }
+    let!(:housing1) { build(:housing, project_id: nil) }
 
-    2.times do
-      Housing.create(ad_price: 254512, localization: "test", property_category: "Studio", project_id: project.id)
+    it 'no create for no user' do
+      housing1.save
+      expect(Housing.count).to eq(0)
     end
 
-    expect(Housing.count).to eq(2)
-  end 
+    it 'create housing for one project' do
+      housing.save
+      expect(Housing.count).to eq(1)
+    end
 
-  context 'validation' do
+    context "don't create if wrong params" do
+      let!(:housing_invalid) { build(:housing, localization: nil) }
+      let!(:housing_invalid1) { build(:housing, property_category: nil) }
+      let!(:housing_invalid2) { build(:housing, ad_price: nil) }
+
+      it "don't create housing without localization" do
+        housing_invalid.save
+        expect(Housing.count).to eq(0)
+      end
+
+      it "don't create housing without property_category" do
+        housing_invalid1.save
+        expect(Housing.count).to eq(0)
+      end
+
+      it "don't create housing without ad_price" do
+        housing_invalid2.save
+        expect(Housing.count).to eq(0)
+      end
+    end
+
     it 'should validate content length' do
-      housing = Housing.new(comment: "!blabla@")
-      expect(housing.valid?).to be false
+      expect(housing1.valid?).to be false
     end
   end
 end

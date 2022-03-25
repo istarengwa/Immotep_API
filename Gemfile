@@ -57,3 +57,7 @@ gem "devise-jwt", "~> 0.9.0"
 gem "faker", "~> 2.20"
 
 gem "mailjet", "~> 1.6"
+
+gem "factory_bot_rails", "~> 6.2"
+
+gem "database_cleaner", "~> 2.0"
