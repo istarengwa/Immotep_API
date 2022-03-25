@@ -2,29 +2,29 @@ require 'rails_helper'
 require 'faker'
 
 RSpec.describe Project, type: :model do
+
+  let!(:user) { create(:user) }
+  let!(:project_invalid) { build(:project, user_id: nil) }
+  let!(:projects) { create_list(:project, 2)}
+
   it 'no create for no user' do
-    Project.create(title: 'Rspec Test')
-    expect(Project.count).to eq(0)
-  end
-
-  it 'create and persist two projects for one user' do
-    user = User.create(email: "rspec@rspec.test", password: "password")
-    
-    2.times do
-      Project.create(title: "Test rspec", user_id: user.id)
-    end
-
+    project_invalid.save
     expect(Project.count).to eq(2)
   end
 
+  it 'creates and keeps two projects for one user' do
+    expect(Project.count).to eq(2)
+  end
+
+  
+
   context 'housing association' do 
-    it 'add one hounsing in one project' do
-      user = User.create(email: "rspec@rspec.test", password: "password")
-      project = Project.create(title: "Test rspec", user_id: user.id)
-      project.housings << Housing.new(ad_price: 5, localization: "test", property_category: "Studio", project_id: project.id)
-      project.save
+
+    let!(:housing) {create(:housing, project_id: projects.first.id)}
+
+    it 'add one housing in one project' do
       expect(Housing.count).to eq(1)
-      expect(project.housings.count).to eq(1)
+      expect(projects.first.housings.count).to eq(1)
     end
   end
 
