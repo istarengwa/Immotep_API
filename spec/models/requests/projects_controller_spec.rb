@@ -1,15 +1,17 @@
 require 'rails_helper'
-#require 'faker'
-#require ''
 
 
 =begin
+
+#### SCHEDULE 
+
 # >> INDEX current_user if @projects include curent_user's project,  render response status (200), 
 # >> Show  project == curent_user if =! raise error, render,
 # >> Create project --> To check that the project count added 1 project, render response status (200) if project.save else raise error
 # >> Update --> project == curent_user if =! raise error, Project.update effective, raise_error if status: :unprocessable_entity
 # >> Destroy --> project == curent_user if =! raise error, To check that the project count remove 1 project 
 # >>
+
 =end
 
 RSpec.describe ProjectsController, type: :request do
@@ -30,6 +32,7 @@ RSpec.describe ProjectsController, type: :request do
     end
   end 
 end
+
 =begin
   describe '#show' do
     context 'when a non-user/no_owner_user try to go on url show' do
