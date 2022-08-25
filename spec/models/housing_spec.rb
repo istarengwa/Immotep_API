@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Housing, type: :model do
 
   describe 'Model Housing' do
-    let!(:user) { create(:user) }
-    let!(:project) { create(:project) }
-    let!(:housing) { build(:housing) }
-    let!(:housing1) { build(:housing, project_id: nil) }
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:project) { FactoryBot.create(:project) }
+    let!(:housing) { FactoryBot.build(:housing) }
+    let!(:housing1) { FactoryBot.build(:housing, project_id: nil) }
 
     it 'no create for no user' do
       housing1.save
